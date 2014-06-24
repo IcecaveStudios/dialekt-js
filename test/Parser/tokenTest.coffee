@@ -29,7 +29,7 @@ tokenDescriptionsTestVectors = [
 
 describe "TokenTest", ->
 
-  it 'Contructor', ->
+  it 'Constructor', ->
     token = new Token Token.STRING, 'foo'
     chai.assert.equal Token.STRING, token.type
     chai.assert.equal 'foo', token.value
