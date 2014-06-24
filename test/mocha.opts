@@ -1,0 +1,6 @@
+--compilers coffee:coffee-script/register
+--require ./test/setup.coffee
+--reporter spec
+--ui tdd
+--recursive
+--colors
