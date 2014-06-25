@@ -7,7 +7,7 @@ module.exports = (grunt) ->
       debug: {
         src: ['README.md', 'src/**/*.coffee'],
         options: {
-          output: 'docs/'
+          output: 'docs/docco'
         }
       }
     # This should be used in conjuction with docco
@@ -18,10 +18,19 @@ module.exports = (grunt) ->
       options: {
         base: 'docs'
         message: 'Auto-generated commit: Updating docs'
-      },
+      }
       src: ['**/*']
 
+    codo: 
+      options: {
+        title: 'Dialekt-js',
+        output: 'docs/codo',
+        inputs: ['src', 'README.md']
+      }
+
+    
   grunt.loadNpmTasks 'grunt-docco'
   grunt.loadNpmTasks 'grunt-gh-pages'
+  grunt.loadNpmTasks 'grunt-codo'
 
   grunt.registerTask 'docco2ghpages', ['docco', 'gh-pages']
