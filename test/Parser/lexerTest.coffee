@@ -121,7 +121,6 @@ lexTestVectors = {
     ]
 }
 
-
 describe "LexerTest", ->
   describe "Lex", ->
     for description, test of lexTestVectors then do (description, test) ->

@@ -1,3 +1,5 @@
+LogicException = require './Exception/logicException'
+
 class Token
   # We want the constants associated with the constructor/class
   # So we can access them rubyish i.e Token.WILDCARD_CHARACTER
@@ -29,7 +31,7 @@ class Token
       when @CLOSE_BRACKET
         return 'close bracket'
 
-    throw new Error("Dialekt Token: Unknown type.")
+    throw new LogicException("Dialekt Token: Unknown type.")
 
 
 module.exports = Token
