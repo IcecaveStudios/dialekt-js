@@ -1,4 +1,4 @@
-LogicException = require './Exception/logicException'
+LogicException = require '../Exception/logicException'
 
 class Token
   # We want the constants associated with the constructor/class
@@ -11,9 +11,13 @@ class Token
   @OPEN_BRACKET       : 6
   @CLOSE_BRACKET      : 7
 
-  constructor: (type, value) ->
+  constructor: (type, value, offset, length, line, column) ->
     @type = type
     @value = value
+    @offset = offset
+    @length = length
+    @line = line
+    @column = column
 
   # static function, again we want it associated to the constructor/class
   @typeDescription: (type) ->
@@ -31,7 +35,7 @@ class Token
       when @CLOSE_BRACKET
         return 'close bracket'
 
-    throw new LogicException("Dialekt Token: Unknown type.")
+    throw new LogicException("Unknown type.")
 
 
 module.exports = Token

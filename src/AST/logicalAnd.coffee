@@ -1,8 +1,8 @@
-AbstractPolyadicOperator = require './abstractPolyadicOperator'
+AbstractPolyadicExpression = require './AbstractPolyadicExpression'
 #
 # An AST node that represents the logical AND operator.
 #
-class LogicalAnd extends AbstractPolyadicOperator
+class LogicalAnd extends AbstractPolyadicExpression
   
   # Pass this node to the appropriate method on the given visitor.
   #

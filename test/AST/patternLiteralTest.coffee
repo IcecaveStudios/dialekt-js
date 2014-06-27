@@ -6,7 +6,7 @@ describe "PatternLiteral", ->
   patternLiteral = new PatternLiteral('foo')
 
   it 'string', ->
-    chai.assert 'foo', patternLiteral.string
+    assert 'foo', patternLiteral.string
 
   it 'accept', ->
     visitor = new VisitorInterface()

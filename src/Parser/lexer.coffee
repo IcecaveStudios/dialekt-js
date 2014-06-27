@@ -1,5 +1,5 @@
 Token = require './token'
-ParseException = require './Exception/parseException'
+ParseException = require '../Exception/parseException'
 
 class Lexer
 
@@ -19,13 +19,29 @@ class Lexer
   ##
   lex: (expression) ->
 
+    # EOL = '\n'
+    # newLineLength = EOL.length
+
+    @currentOffset = 0
+    @currentLine   = 1
+    @currentColumn = 0
     @state = Lexer.STATE_BEGIN #this.constructor.STATE_BEGIN
     @tokens = []
     @buffer = ''
-    
-    chars = expression?.split('') or [] #protects against expression == undefined
-    
-    for char in chars
+
+    previousChar = null
+
+    expLength = expression.length
+    while @currentOffset < expLength
+
+      @currentColumn++
+
+      if '\n' is previousChar or ('\r' is previousChar and '\n' is char)
+        @currentLine++
+        @currentColumn = 1
+
+      char = expression.charAt(@currentOffset)
+
       if Lexer.STATE_SIMPLE_STRING is @state
         @_handleSimpleStringState char
       else if Lexer.STATE_QUOTED_STRING is @state
@@ -34,6 +50,9 @@ class Lexer
         @_handleQuotedStringEscapeState char
       else
         @_handleBeginState char
+
+      @currentOffset++
+      previousChar = char
 
     if Lexer.STATE_SIMPLE_STRING is @state
       @_finalizeSimpleString()
@@ -50,55 +69,79 @@ class Lexer
     if Lexer.ctype_space(char)
         # ignore
     else if char is '('
-      @tokens.push new Token(Token.OPEN_BRACKET, char)
+      @_startToken Token.OPEN_BRACKET
+      @_endToken char
     else if char is ')'
-      @tokens.push new Token(Token.CLOSE_BRACKET, char)
+      @_startToken Token.CLOSE_BRACKET
+      @_endToken char
     else if char is '"'
-      @state = Lexer.STATE_QUOTED_STRING;
+      @_startToken Token.STRING
+      @state = Lexer.STATE_QUOTED_STRING
     else
-      @state = Lexer.STATE_SIMPLE_STRING;
-      @buffer = char;
+      @_startToken Token.STRING
+      @state = Lexer.STATE_SIMPLE_STRING
+      @buffer = char
     
 
   _handleSimpleStringState: (char) ->
     if Lexer.ctype_space(char)
-       @_finalizeSimpleString();
+      @_finalizeSimpleString()
     else if char is '(' 
-       @_finalizeSimpleString();
-       @tokens.push new Token(Token.OPEN_BRACKET, char)
+      @_finalizeSimpleString()
+      @_startToken Token.OPEN_BRACKET
+      @_endToken char
     else if char is ')' 
-       @_finalizeSimpleString();
-       @tokens.push new Token(Token.CLOSE_BRACKET, char)
+      @_finalizeSimpleString()
+      @_startToken Token.CLOSE_BRACKET
+      @_endToken char
     else
-       @buffer += char;
+       @buffer += char
 
   _handleQuotedStringState: (char) ->
     if char is '\\'
-      @state = Lexer.STATE_QUOTED_STRING_ESCAPE;
+      @state = Lexer.STATE_QUOTED_STRING_ESCAPE
     else if char is '"'
-      @tokens.push new Token(Token.STRING, @buffer);
-      @state = Lexer.STATE_BEGIN;
-      @buffer = '';
+      @_endToken @buffer
+      @state = Lexer.STATE_BEGIN
+      @buffer = ''
     else
-      @buffer += char;
+      @buffer += char
 
   _handleQuotedStringEscapeState: (char) ->
-    @state = Lexer.STATE_QUOTED_STRING;
-    @buffer += char;
+    @state = Lexer.STATE_QUOTED_STRING
+    @buffer += char
 
   _finalizeSimpleString: ->
     if Lexer.strcasecmp('and', @buffer)
-      tokenType = Token.LOGICAL_AND
+      @tokenType = Token.LOGICAL_AND
     else if Lexer.strcasecmp('or', @buffer)
-      tokenType = Token.LOGICAL_OR
+      @tokenType = Token.LOGICAL_OR
     else if Lexer.strcasecmp('not', @buffer)
-      tokenType = Token.LOGICAL_NOT
-    else
-      tokenType = Token.STRING
+      @tokenType = Token.LOGICAL_NOT
 
-    @tokens.push new Token(tokenType, @buffer)
-    @state = Lexer.STATE_BEGIN;
-    @buffer = '';
+    @_endToken @buffer, -1
+    @state = Lexer.SdTATE_BEGIN
+    @buffer = ''
+
+
+  _startToken: (type) ->
+    @tokenType = type
+    @tokenOffset = @currentOffset
+    @tokenLine = @currentLine
+    @tokenColumn = @currentColumn
+
+  _endToken: (value, lengthAdjustment = 0) ->
+    debugger
+    @tokens.push new Token(
+      @tokenType,
+      value,
+      @tokenOffset,
+      @currentOffset - @tokenOffset + lengthAdjustment + 1,
+      @tokenLine,
+      @tokenColumn
+    )
+
+    @tokenOffset = @currentOffset
 
   # checks if string is all white space
   @ctype_space: (str) ->

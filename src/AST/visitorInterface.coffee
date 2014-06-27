@@ -1,31 +1,33 @@
+InterfaceException = require '../Exception/interfaceException'
+
 #
 # Interface for node visitors.
 #
 class VisitorInterface
  
   visitLogicalAnd: (logicalAndNode) ->
-    throw new Error("cannot call interface method")
+    throw new InterfaceException()
 
   visitLogicalOr: (logicalOrNode) ->
-    throw new Error("cannot call interface method")
+    throw new InterfaceException()
 
   visitLogicalNot: (logicalNotNode) ->
-    throw new Error("cannot call interface method")
+    throw new InterfaceException()
 
   visitTag: (tagNode) ->
-    throw new Error("cannot call interface method")
+    throw new InterfaceException()
 
   visitPattern: (PatternNode) ->
-    throw new Error("cannot call interface method")
+    throw new InterfaceException()
 
   visitPatternLiteral: (PatternLiteralNode) ->
-    throw new Error("cannot call interface method")
+    throw new InterfaceException()
 
   visitPatternWildcard: (PatternWildcard) ->
-    throw new Error("cannot call interface method")
+    throw new InterfaceException()
 
   visitEmptyExpression: (emptyExpressionNode) ->
-    throw new Error("cannot call interface method")
+    throw new InterfaceException()
 
 
 module.exports = VisitorInterface

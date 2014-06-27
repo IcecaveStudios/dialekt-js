@@ -6,7 +6,7 @@ describe "Tag", ->
   tag = new Tag('foo')
 
   it 'name', ->
-    chai.assert 'foo', tag.name
+    assert 'foo', tag.name
 
   it 'accept', ->
     visitor = new VisitorInterface()

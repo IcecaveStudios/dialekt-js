@@ -3,7 +3,7 @@ LogicalNot = require '../../src/AST/logicalNot'
 VisitorInterface = require '../../src/AST/visitorInterface'
 
 #
-# @covers AbstractPolyadicOperator
+# @covers AbstractPolyadicExpression
 #
 describe 'LogicalNot', ->
   # setup
@@ -11,7 +11,7 @@ describe 'LogicalNot', ->
   expression = new LogicalNot child
 
   it 'child', ->
-    chai.assert.deepEqual child, expression.child
+    assert.deepEqual child, expression.child
 
   it 'accept', ->
     visitor = new VisitorInterface()

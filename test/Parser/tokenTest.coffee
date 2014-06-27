@@ -1,4 +1,5 @@
 Token = require '../../src/Parser/token'
+LogicException = require '../../src/Exception/logicException'
 
 tokenDescriptionsTestVectors = [
   {
@@ -27,17 +28,21 @@ tokenDescriptionsTestVectors = [
  }
 ]
 
-describe "TokenTest", ->
+describe 'TokenTest', ->
 
   it 'Constructor', ->
-    token = new Token Token.STRING, 'foo'
-    chai.assert.equal Token.STRING, token.type
-    chai.assert.equal 'foo', token.value
+    token = new Token Token.STRING, 'foo', 1,2,3,4
+    assert.equal Token.STRING, token.type
+    assert.equal 'foo', token.value
+    assert.equal 1, token.offset
+    assert.equal 2, token.length
+    assert.equal 3, token.line
+    assert.equal 4, token.column
     
   describe 'Type Description', ->
     it 'Correct Types', ->
       tokenDescriptionsTestVectors.forEach (tokenTestVector) ->
-        chai.assert.equal tokenTestVector.description, Token.typeDescription(tokenTestVector.type)
+        assert.equal tokenTestVector.description, Token.typeDescription(tokenTestVector.type)
     it 'Incorrect Type', ->
-      chai.expect(-> Token.typeDescription('unknown')).to.throw('Dialekt Token: Unknown type.')
+      assert.throw (-> Token.typeDescription('unknown')), LogicException, 'Unknown type.'
       

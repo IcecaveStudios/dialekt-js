@@ -1,8 +1,8 @@
-ExpressionInterface = require './expressionInterface'
+AbstractExpression = require './abstractExpression'
 #
 # A base class providing common functionality for polyadic operators: LogicalOr, LogicalAnd
 #
-class AbstractPolyadicOperator extends ExpressionInterface
+class AbstractPolyadicExpression extends AbstractExpression
 
   #
   # @param ExpressionInterface expressions[],... One or more children to add to this operator.
@@ -17,5 +17,5 @@ class AbstractPolyadicOperator extends ExpressionInterface
     @children.push expression
 
 
-module.exports = AbstractPolyadicOperator
+module.exports = AbstractPolyadicExpression
 

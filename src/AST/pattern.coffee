@@ -1,8 +1,8 @@
-ExpressionInterface = require './expressionInterface'
+AbstractExpression = require './abstractExpression'
 #
 # An AST node that represents a pattern-match expression.
 #
-class Pattern extends ExpressionInterface
+class Pattern extends AbstractExpression
 
   #
   # @param PatternChildInterface patterns[],... One or more pattern literals or placeholders.

@@ -3,7 +3,7 @@ LogicalAnd = require '../../src/AST/logicalAnd'
 VisitorInterface = require '../../src/AST/visitorInterface'
 
 #
-# @covers AbstractPolyadicOperator
+# @covers AbstractPolyadicExpression
 #
 describe 'LogicalAnd', ->
   # setup
@@ -13,11 +13,11 @@ describe 'LogicalAnd', ->
   expression = new LogicalAnd child1, child2
 
   it 'children', ->
-    chai.assert.deepEqual [child1, child2], expression.children
+    assert.deepEqual [child1, child2], expression.children
 
   it 'add', ->
     expression.add child3
-    chai.assert.deepEqual [child1, child2, child3], expression.children
+    assert.deepEqual [child1, child2, child3], expression.children
 
   it 'accept', ->
     visitor = new VisitorInterface()

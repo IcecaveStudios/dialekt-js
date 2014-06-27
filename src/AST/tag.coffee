@@ -1,8 +1,8 @@
-ExpressionInterface = require './expressionInterface'
+AbstractExpression = require './abstractExpression'
 #
 # An AST node that represents the logical NOT operator.
 #
-class Tag extends ExpressionInterface
+class Tag extends AbstractExpression
 
   #
   # @param string The tag name.
