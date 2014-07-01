@@ -131,7 +131,6 @@ class Lexer
     @tokenColumn = @currentColumn
 
   _endToken: (value, lengthAdjustment = 0) ->
-    debugger
     @tokens.push new Token(
       @tokenType,
       value,

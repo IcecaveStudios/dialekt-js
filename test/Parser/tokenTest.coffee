@@ -28,7 +28,7 @@ tokenDescriptionsTestVectors = [
  }
 ]
 
-describe 'TokenTest', ->
+describe 'Token', ->
 
   it 'Constructor', ->
     token = new Token Token.STRING, 'foo', 1,2,3,4

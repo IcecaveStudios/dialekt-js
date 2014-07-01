@@ -22,19 +22,19 @@ class Token
   # static function, again we want it associated to the constructor/class
   @typeDescription: (type) ->
     switch type
-      when @LOGICAL_AND
+      when Token.LOGICAL_AND
         return 'AND operator'
-      when @LOGICAL_OR
+      when Token.LOGICAL_OR
         return 'OR operator'
-      when @LOGICAL_NOT
+      when Token.LOGICAL_NOT
         return 'NOT operator'
-      when @STRING
+      when Token.STRING
         return 'tag'
-      when @OPEN_BRACKET
+      when Token.OPEN_BRACKET
         return 'open bracket'
-      when @CLOSE_BRACKET
+      when Token.CLOSE_BRACKET
         return 'close bracket'
-
+        
     throw new LogicException("Unknown type.")
 
 
