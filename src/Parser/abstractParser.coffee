@@ -13,12 +13,8 @@ class AbstractParser extends ParserInterface
   # @param LexerInterface|null lexer The lexer used to tokenise input expressions.
   #
   constructor: (lexer) -> 
-    @lexer = lexer or new Lexer;
-
-    @captureSourceOffsetStack = []
-
+    @tokenStack = []
     @setWildcardString(Token.WILDCARD_CHARACTER)
-    @setCaptureSource(false)
 
   #
   # Set the string to use as a wildcard placeholder.
@@ -40,30 +36,35 @@ class AbstractParser extends ParserInterface
   #
   # Parse an expression.
   #
-  # @param string expression The expression to parse.
+  # @param string         expression The expression to parse.
+  # @param LexerInterface lexer      The lexer to use to tokenise the string, or null to use the default.
   #
   # @return ExpressionInterface The parsed expression.
   # @throws ParseException      if the expression is invalid.
   #
-  parse: (expression) ->
-    if @captureSource
-      @captureSourceExpression = expression
+  parse: (expression, lexer) ->
+    lexer ?= new Lexer
 
+    return @parseTokens lexer.lex(expression)
+
+  # Parse an expression that has already beed tokenized.
+  #
+  # @param array<Token> The array of tokens that form the expression.
+  #
+  # @return ExpressionInterface The parsed expression.
+  # @throws ParseException      if the expression is invalid.
+  parseTokens: (tokens) ->
     # This acts as our array iterator
     @currentTokenIndex = 0
-    @tokens = @lexer.lex(expression)
+    @tokens = tokens
 
     if not @tokens or @tokens.length is 0
-      expression = new EmptyExpression
-      if @captureSource
-        expression.setSource @captureSourceExpression, 0
-
-      return expression
+      return new EmptyExpression
 
     expression = @_parseExpression()
 
     if @tokens[@currentTokenIndex]
-        throw new ParseException 'Unexpected ' + Token.typeDescription(@tokens[@currentTokenIndex].type) + ', expected end of input.'
+      throw new ParseException 'Unexpected ' + Token.typeDescription(@tokens[@currentTokenIndex].type) + ', expected end of input.'
 
     return expression
 
@@ -76,8 +77,8 @@ class AbstractParser extends ParserInterface
 
     if not token 
       throw new ParseException 'Unexpected end of input, expected ' + @_formatExpectedTokenNames(types) + '.'
-    else if not token.type in types
-      throw new ParseException 'Unexpected ' . Token.typeDescription(token.type) + ', expected ' + @formatExpectedTokenNames(types) + '.'
+    else if token.type not in types
+      throw new ParseException 'Unexpected ' + Token.typeDescription(token.type) + ', expected ' + @_formatExpectedTokenNames(types) + '.'
 
     return token
 
@@ -97,8 +98,7 @@ class AbstractParser extends ParserInterface
   # If source-capture is enabled, the current source code offset is recoreded.
   #
   _startExpression: () ->
-    if @captureSource
-      @captureSourceOffsetStack.push @tokens[@currentTokenIndex].offset
+    @tokenStack.push @tokens[@currentTokenIndex]
 
   #
   # Record the end of an expression.
@@ -109,23 +109,18 @@ class AbstractParser extends ParserInterface
   # @return ExpressionInterface
   #
   _endExpression: (expression) ->
-    if @captureSource
-      # The start index has already been recoreded ...
-      startOffset = @captureSourceOffsetStack.pop()
+    #Find the end offset of the source for this node ...
+    index = @currentTokenIndex
 
-      # We're at the end of the input stream, so get the last token in
-      # the token stream ...
-      if @currentTokenIndex >= @tokens.length
-          index = @tokens.length - 1
-  
-      # The #current# token is the start of the next node, so we need to
-      # look at the #previous# token.
-      token = @tokens[index - 1];
+    # We're at the end of the input stream, so get the last token in
+    # the token stream ...
+    if @currentTokenIndex > @tokens.length
+      index = @tokens.length - 1
 
-      # Get the portion of the input string that corresponds to this node ...
-      source = @captureSourceExpression.substr startOffset, token.offset + token.length - startOffset
-
-      expression.setSource(source, startOffset);
+    # The *current* token is the start of the next node, so we need to
+    # look at the *previous* token to find the last token of this
+    # expression ...
+    expression.setTokens @tokenStack.pop(), @tokens[index-1]
 
     return expression
 

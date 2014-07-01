@@ -1,45 +1,31 @@
 ExpressionInterface = require './expressionInterface'
-LogicException      = require '../Exception/logicException'
 #
 # A base class providing common functionality for expressions.
 #
 class AbstractExpression extends ExpressionInterface
 
-  # Fetch the original source code of this expression.
+  # Fetch the first token from the source that is part of this expression.
   #
-  # @return string The original source code of this expression.
+  # @return Token|null The first token from this expression.
   #
-  source: ->
-    if not @_source?
-      throw new LogicException('Source has not been captured.')
+  firstToken: () ->
+    return @_firstToken
 
-    return @_source
+  # Fetch the last token from the source that is part of this expression.
+  #
+  # @return Token|null The last token from this expression.
+  #
+  lastToken: () ->
+    return @_lastToken
 
-  # Fetch the index of the first character of this expression in the source code.
+  # Set the delimiting tokens for this expression.
   #
-  # @return integer The index of the first character of this expression in the source code.
+  # @param Token $firstToken The first token from this expression.
+  # @param Token $lastToken  The last token from this expression.
   #
-  sourceOffset: () ->  
-    if not @_sourceOffset?
-      throw new LogicException('Source offset has not been captured.')
+  setTokens: (firstToken, lastToken) ->
+    @_firstToken = firstToken
+    @_lastToken = lastToken
 
-    return @_sourceOffset
-  
-  # Indiciates whether or not the expression contains information about the
-  # original source of the expression.
-  #
-  # @return boolean True if the source/offset has been captured otherwise, false.
-  #
-  hasSource: ->
-    return @_source?
-  
-  # Set the original source code of this expression.
-  #
-  # @param string  $source       The original source code of this expression.
-  # @param integer $sourceOffset The offset into the original source code where this code begins.
-  #
-  setSource: (source, sourceOffset) ->
-    @_source = source
-    @_sourceOffset = sourceOffset
 
 module.exports = AbstractExpression

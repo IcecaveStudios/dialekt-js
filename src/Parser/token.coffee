@@ -11,13 +11,13 @@ class Token
   @OPEN_BRACKET       : 6
   @CLOSE_BRACKET      : 7
 
-  constructor: (type, value, offset, length, line, column) ->
+  constructor: (type, value, startOffset, endOffset, lineNumber, columnNumber) ->
     @type = type
     @value = value
-    @offset = offset
-    @length = length
-    @line = line
-    @column = column
+    @startOffset = startOffset
+    @endOffset = endOffset
+    @lineNumber = lineNumber
+    @columnNumber = columnNumber
 
   # static function, again we want it associated to the constructor/class
   @typeDescription: (type) ->

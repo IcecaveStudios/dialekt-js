@@ -34,10 +34,10 @@ describe 'Token', ->
     token = new Token Token.STRING, 'foo', 1,2,3,4
     assert.equal Token.STRING, token.type
     assert.equal 'foo', token.value
-    assert.equal 1, token.offset
-    assert.equal 2, token.length
-    assert.equal 3, token.line
-    assert.equal 4, token.column
+    assert.equal 1, token.startOffset
+    assert.equal 2, token.endOffset
+    assert.equal 3, token.lineNumber
+    assert.equal 4, token.columnNumber
     
   describe 'Type Description', ->
     it 'Correct Types', ->

@@ -18,8 +18,8 @@ class ExpressionParser extends AbstractParser
   #
   # @param LexerInterface|null lexer The lexer used to tokenise input expressions.
   #
-  constructor: (lexer) ->
-    super lexer
+  constructor: () ->
+    super
     @setLogicalOrByDefault(false);
   
   #

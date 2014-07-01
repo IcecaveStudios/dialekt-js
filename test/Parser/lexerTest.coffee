@@ -33,7 +33,7 @@ lexTestVectors = {
     expression: 'foo bar'
     result: [
       new Token Token.STRING, 'foo', 0, 3, 1, 1
-      new Token Token.STRING, 'bar', 4, 3, 1, 5
+      new Token Token.STRING, 'bar', 4, 7, 1, 5
     ]
 
   'quoted string':
@@ -76,8 +76,8 @@ lexTestVectors = {
     expression: 'aNd Or NoT'
     result: [
       new Token Token.LOGICAL_AND, 'aNd', 0, 3, 1, 1
-      new Token Token.LOGICAL_OR,  'Or',  4, 2, 1, 5
-      new Token Token.LOGICAL_NOT, 'NoT', 7, 3, 1, 8
+      new Token Token.LOGICAL_OR,  'Or',  4, 6,  1, 5
+      new Token Token.LOGICAL_NOT, 'NoT', 7, 10, 1, 8
     ]
 
   'open nesting':
@@ -95,50 +95,48 @@ lexTestVectors = {
   'nesting interrupts simple string':
     expression: 'foo(bar)spam'
     result: [
-      new Token Token.STRING,        'foo',  0, 3, 1, 1
-      new Token Token.OPEN_BRACKET,  '(',    3, 1, 1, 4
-      new Token Token.STRING,        'bar',  4, 3, 1, 5
-      new Token Token.CLOSE_BRACKET, ')',    7, 1, 1, 8
-      new Token Token.STRING,        'spam', 8, 4, 1, 9
+      new Token Token.STRING,        'foo',  0, 3,  1, 1
+      new Token Token.OPEN_BRACKET,  '(',    3, 4,  1, 4
+      new Token Token.STRING,        'bar',  4, 7,  1, 5
+      new Token Token.CLOSE_BRACKET, ')',    7, 8,  1, 8
+      new Token Token.STRING,        'spam', 8, 12, 1, 9
     ]
 
   'nesting interrupts simple string into quoted string':
     expression: 'foo(bar)"spam"'
     result: [
-      new Token Token.STRING,        'foo',  0, 3, 1, 1
-      new Token Token.OPEN_BRACKET,  '(',    3, 1, 1, 4
-      new Token Token.STRING,        'bar',  4, 3, 1, 5
-      new Token Token.CLOSE_BRACKET, ')',    7, 1, 1, 8
-      new Token Token.STRING,        'spam', 8, 6, 1, 9
+      new Token Token.STRING,        'foo',  0, 3,  1, 1
+      new Token Token.OPEN_BRACKET,  '(',    3, 4,  1, 4
+      new Token Token.STRING,        'bar',  4, 7,  1, 5
+      new Token Token.CLOSE_BRACKET, ')',    7, 8,  1, 8
+      new Token Token.STRING,        'spam', 8, 14, 1, 9
     ]
 
   'whitespace surrounding strings':
     expression: " \t\nfoo\tbar\nspam\t "
     result: [
-      new Token Token.STRING, 'foo',   3, 3, 2, 1
-      new Token Token.STRING, 'bar',   7, 3, 2, 5
-      new Token Token.STRING, 'spam', 11, 4, 3, 1
+      new Token Token.STRING, 'foo',   3, 6,  2, 1
+      new Token Token.STRING, 'bar',   7, 10, 2, 5
+      new Token Token.STRING, 'spam', 11, 15, 3, 1
     ]
 
   'newline inside string':
-    expression: '"foo\nbar"',
+    expression: '"foo' + "\n" + 'bar" baz',
     result: [
-      new Token Token.STRING,
-        'foo\nbar',
-        0,
-        8 + '\n'.length,
-        1,
-        1
+      new Token Token.STRING, 'foo' + "\n" + 'bar',  0,  9, 1, 1
+      new Token Token.STRING, 'baz',                10, 13, 2, 6
     ]
-  'newline inside string \\r\\n':
-    expression: '"foo\r\nbar"',
+  'carriage return handling':
+    expression: '"foo' + "\r" + 'bar" baz',
     result: [
-      new Token Token.STRING,
-        'foo\r\nbar',
-        0,
-        8 + '\r\n'.length,
-        1,
-        1
+      new Token Token.STRING, 'foo' + "\r" + 'bar',  0,  9, 1, 1
+      new Token Token.STRING, 'baz',                10, 13, 2, 6
+    ]
+  'carriage return + newline handling':
+    expression: '"foo' + "\r\n" + 'bar" baz',
+    result: [
+      new Token Token.STRING, 'foo' + "\r\n" + 'bar',  0, 10, 1, 1
+      new Token Token.STRING, 'baz',                  11, 14, 2, 6
     ]
 }
 

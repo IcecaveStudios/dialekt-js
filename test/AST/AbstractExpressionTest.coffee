@@ -1,22 +1,20 @@
 AbstractExpression = require '../../src/AST/abstractExpression'
-LogicException = require '../../src/Exception/logicException'
+Token = require '../../src/Parser/token'
 
 describe 'AbstractExpression', ->
 
   node = new AbstractExpression()
     
-  it 'no source', ->
-    assert.throw (-> node.source()), LogicException, 'Source has not been captured.'
+  it 'defaults', ->
+    assert.isUndefined node.firstToken()
+    assert.isUndefined node.lastToken()
 
-  it 'no offset', ->
-    assert.throw (-> node.sourceOffset()), LogicException, 'Source offset has not been captured.'    
-  
-  it 'set source', ->
-    node.setSource 'foobar', 12
-    assert.equal 'foobar', node._source
-    assert.equal 12, node._sourceOffset
+  it 'setTokens', ->
+    t1 = new Token
+    t2 = new Token
+    node.setTokens t1, t2
+    assert.equal t1, node.firstToken()
+    assert.equal t2, node.lastToken()
 
-  it 'has source', ->
-    assert.isTrue node.hasSource()
 
     

@@ -34,13 +34,13 @@ class Lexer
     expLength = expression.length
     while @currentOffset < expLength
 
+      char = expression.charAt(@currentOffset)
       @currentColumn++
-
-      if '\n' is previousChar or ('\r' is previousChar and '\n' is char)
+      
+      if '\n' is previousChar or ('\r' is previousChar and '\n' isnt char)
         @currentLine++
         @currentColumn = 1
 
-      char = expression.charAt(@currentOffset)
 
       if Lexer.STATE_SIMPLE_STRING is @state
         @_handleSimpleStringState char
@@ -135,7 +135,7 @@ class Lexer
       @tokenType,
       value,
       @tokenOffset,
-      @currentOffset - @tokenOffset + lengthAdjustment + 1,
+      @currentOffset + lengthAdjustment + 1,
       @tokenLine,
       @tokenColumn
     )

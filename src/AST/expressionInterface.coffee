@@ -7,28 +7,26 @@ InterfaceException = require '../Exception/interfaceException'
 #
 class ExpressionInterface extends NodeInterface
 
-  # Fetch the original source code of this expression.
+  # Fetch the first token from the source that is part of this expression.
   #
-  # @return string         The original source code of this expression.
-  # @throws LogicException if the source has not been captured by the parser.
+  # @return Token|null The first token from this expression.
   #
-  source: ->
+  firstToken: () ->
     throw new InterfaceException()
 
-  # Fetch the index of the first character of this expression in the source code.
+  # Fetch the last token from the source that is part of this expression.
   #
-  # @return integer        The index of the first character of this expression in the source code.
-  # @throws LogicException if the source has not been captured by the parser.
+  # @return Token|null The last token from this expression.
   #
-  sourceOffset: ->
+  lastToken: () ->
     throw new InterfaceException()
 
-  # Indiciates whether or not the expression contains information about the
-  # original source of the expression.
+  # Set the delimiting tokens for this expression.
   #
-  # @return boolean True if the source/offset has been captured; otherwise, false.
+  # @param Token $firstToken The first token from this expression.
+  # @param Token $lastToken  The last token from this expression.
   #
-  hasSource: ->
+  setTokens: (firstToken, lastToken) ->
     throw new InterfaceException()
 
     
