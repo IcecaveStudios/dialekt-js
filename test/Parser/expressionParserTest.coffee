@@ -186,6 +186,7 @@ describe 'ExpressionParser', ->
 
   describe 'Parse', ->
 
+    it.skip 'Pass tests', ->
     # for description, test of parseTestVectors then do (description, test) ->
     #   it description, ->
     #     # console.log description
@@ -196,17 +197,13 @@ describe 'ExpressionParser', ->
     describe 'Fail tests', ->
       for description, test of parseFailureTestVectors then do (description, test) ->
         it description, ->
-          debugger
           assert.throw (-> parser.parse(test.expression)), ParseException, test.result
 
-    it 'using LogicalOrAsDefaultOperator', ->
+    it.skip 'using LogicalOrAsDefaultOperator', ->
       parserLOR = new ExpressionParser
       parserLOR.setLogicalOrByDefault true
       expression = '((a AND b) OR (c AND d))'
-
       result = parser.parse expression
-      console.log "IMPLEMENT LOR DEFAULT"
-
 
     it 'with Source Capture', ->
       expression = 'a AND (b OR c) AND NOT p*'
@@ -241,9 +238,6 @@ describe 'ExpressionParser', ->
       subNode = nodeChildren[1]
       assert.deepEqual tokens[5], subNode.firstToken()
       assert.deepEqual tokens[5], subNode.lastToken()
-
-
-
       
 
       # children = result.children

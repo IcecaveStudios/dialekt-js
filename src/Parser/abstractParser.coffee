@@ -114,8 +114,8 @@ class AbstractParser extends ParserInterface
 
     # We're at the end of the input stream, so get the last token in
     # the token stream ...
-    if @currentTokenIndex > @tokens.length
-      index = @tokens.length - 1
+    if @currentTokenIndex >= @tokens.length
+      index = @tokens.length
 
     # The *current* token is the start of the next node, so we need to
     # look at the *previous* token to find the last token of this
