@@ -1,7 +1,7 @@
 LogicException = require '../Exception/logicException'
 
 class Token
-  # We want the constants associated with the constructor/class
+  # @ because we want the constants associated with the constructor/class
   # So we can access them rubyish i.e Token.WILDCARD_CHARACTER
   @WILDCARD_CHARACTER : '*'
   @LOGICAL_AND        : 1

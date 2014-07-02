@@ -192,7 +192,6 @@ describe 'ExpressionParser', ->
     #     # console.log description
     #     # chai.assert.deepEqual parser.parse(test.expression), test.result, description
     #     assert.equal JSON.stringify(parser.parse(test.expression)), JSON.stringify(test.result)
-        # for description, test of parseTestVectors then do (description, test) ->
     
     describe 'Fail tests', ->
       for description, test of parseFailureTestVectors then do (description, test) ->
