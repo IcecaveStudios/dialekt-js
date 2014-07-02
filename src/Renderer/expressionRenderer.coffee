@@ -12,7 +12,6 @@ class ExpressionRenderer extends VisitorInterface
   constructor: (wildcardString) ->
     @wildcardString = wildcardString or Token.WILDCARD_CHARACTER
   
-  
   # Render an expression to a string.
   #
   # @param ExpressionInterface expression The expression to render.
@@ -128,11 +127,9 @@ class ExpressionRenderer extends VisitorInterface
   visitEmptyExpression: (node) ->
     return 'NOT ' + @wildcardString
   
-  @escapeString: (string) ->
-  
+  @escapeString: (string) ->  
     if string.toUpperCase() in ['AND', 'OR', 'NOT']
       return '"' + string + '"';
-
 
     replacedStr = string.replace(/[\(\)"\\\\]/g, '\\$&')
 
