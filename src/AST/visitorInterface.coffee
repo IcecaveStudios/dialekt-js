@@ -1,33 +1,32 @@
 InterfaceException = require '../Exception/interfaceException'
-
 #
 # Interface for node visitors.
 #
 class VisitorInterface
  
   visitLogicalAnd: (logicalAndNode) ->
-    throw new InterfaceException()
+    throw new InterfaceException
 
   visitLogicalOr: (logicalOrNode) ->
-    throw new InterfaceException()
+    throw new InterfaceException
 
   visitLogicalNot: (logicalNotNode) ->
-    throw new InterfaceException()
+    throw new InterfaceException
 
   visitTag: (tagNode) ->
-    throw new InterfaceException()
+    throw new InterfaceException
 
   visitPattern: (PatternNode) ->
-    throw new InterfaceException()
+    throw new InterfaceException
 
   visitPatternLiteral: (PatternLiteralNode) ->
-    throw new InterfaceException()
+    throw new InterfaceException
 
   visitPatternWildcard: (PatternWildcard) ->
-    throw new InterfaceException()
+    throw new InterfaceException
 
   visitEmptyExpression: (emptyExpressionNode) ->
-    throw new InterfaceException()
+    throw new InterfaceException
 
 
 module.exports = VisitorInterface

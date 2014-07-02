@@ -46,7 +46,6 @@ class ListParser extends AbstractParser
 
     return @_endExpression(expression)
   
-
   # Parse a list of tags into an array.
   #
   # The expression must be a space-separated list of tags. The result is

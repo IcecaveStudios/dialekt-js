@@ -8,15 +8,13 @@ class Lexer
   @STATE_QUOTED_STRING:        3
   @STATE_QUOTED_STRING_ESCAPE: 4
 
-
-  ##
-  ## Tokenize an expression.
-  ##
-  ## @param string 'expression' The expression to parse.
-  ##
-  ## @return array<Token>   The tokens of the expression.
-  ## @throws ParseException if the expression is invalid.
-  ##
+  # Tokenize an expression.
+  #
+  # @param string 'expression' The expression to parse.
+  #
+  # @return array<Token>   The tokens of the expression.
+  # @throws ParseException if the expression is invalid.
+  #
   lex: (expression) ->
 
     # EOL = '\n'
@@ -40,7 +38,6 @@ class Lexer
       if '\n' is previousChar or ('\r' is previousChar and '\n' isnt char)
         @currentLine++
         @currentColumn = 1
-
 
       if Lexer.STATE_SIMPLE_STRING is @state
         @_handleSimpleStringState char
@@ -82,7 +79,6 @@ class Lexer
       @state = Lexer.STATE_SIMPLE_STRING
       @buffer = char
     
-
   _handleSimpleStringState: (char) ->
     if Lexer.ctype_space(char)
       @_finalizeSimpleString()
@@ -122,7 +118,6 @@ class Lexer
     @_endToken @buffer, -1
     @state = Lexer.SdTATE_BEGIN
     @buffer = ''
-
 
   _startToken: (type) ->
     @tokenType = type

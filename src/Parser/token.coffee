@@ -19,6 +19,7 @@ class Token
     @lineNumber = lineNumber
     @columnNumber = columnNumber
 
+  # Returns string description of a token type
   # static function, again we want it associated to the constructor/class
   @typeDescription: (type) ->
     switch type
