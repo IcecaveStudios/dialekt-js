@@ -1,3 +1,5 @@
+ExpressionRenderer = require '../../src/Renderer/expressionRenderer'
+
 EmptyExpression = require '../../src/AST/emptyExpression'
 LogicalAnd      = require '../../src/AST/logicalAnd'
 Tag             = require '../../src/AST/tag'
@@ -32,8 +34,14 @@ parseTestVectors =
 describe 'ListParser', ->
 
   parser = new ListParser
+  renderer = new ExpressionRenderer
 
-  it.skip 'Parse', ->
+  describe 'Parse', ->
+    for description, test of parseTestVectors then do (description, test) ->
+      it description, ->
+        result = parser.parse(test.expression)
+        # chai.assert.deepEqual parser.parse(test.expression), test.result, description
+        assert.equal renderer.render(result), renderer.render(test.result)
     #todo
 
   describe 'Parse as Array', ->
