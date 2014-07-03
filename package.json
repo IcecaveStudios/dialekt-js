@@ -2,9 +2,12 @@
   "name": "dialekt-js",
   "version": "0.0.0",
   "description": "JS port of IcecaveStudios PHP Dialekt",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "mocha"
+    "build":        "coffee --compile --output lib src",
+    "prepublish":   "coffee --compile --output lib src",
+    "postpublish":  "rm -rf lib",
+    "test":         "mocha"
   },
   "keywords": [
     "expression",
