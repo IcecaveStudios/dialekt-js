@@ -76,7 +76,6 @@ describe 'Renderer', ->
       it description, ->
         chai.assert.deepEqual renderer.render(test.expression), test.result, description
 
-    
   describe 'Render Failure', ->
     it 'wildcard in PatternLiteral', ->
       assert.throw -> 

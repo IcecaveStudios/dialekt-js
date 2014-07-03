@@ -141,10 +141,10 @@ lexTestVectors = {
 }
 
 describe 'Lexer', ->
+  lexer = new Lexer
   describe 'Lex', ->
     for description, test of lexTestVectors then do (description, test) ->
       it description, ->
-        lexer = new Lexer
         # console.log description
         chai.assert.deepEqual lexer.lex(test.expression), test.result, description
 
