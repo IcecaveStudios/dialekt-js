@@ -10,7 +10,7 @@ class Lexer
 
   # Tokenize an expression.
   #
-  # @param string 'expression' The expression to parse.
+  # @param string 'expression' The expression to tokenize.
   #
   # @return array<Token>   The tokens of the expression.
   # @throws ParseException if the expression is invalid.
@@ -109,33 +109,31 @@ class Lexer
 
   _finalizeSimpleString: ->
     if Lexer.strcasecmp('and', @buffer)
-      @tokenType = Token.LOGICAL_AND
+      @nextToken.type = Token.LOGICAL_AND
     else if Lexer.strcasecmp('or', @buffer)
-      @tokenType = Token.LOGICAL_OR
+      @nextToken.type = Token.LOGICAL_OR
     else if Lexer.strcasecmp('not', @buffer)
-      @tokenType = Token.LOGICAL_NOT
+      @nextToken.type = Token.LOGICAL_NOT
 
     @_endToken @buffer, -1
     @state = Lexer.SdTATE_BEGIN
     @buffer = ''
 
   _startToken: (type) ->
-    @tokenType = type
-    @tokenOffset = @currentOffset
-    @tokenLine = @currentLine
-    @tokenColumn = @currentColumn
-
-  _endToken: (value, lengthAdjustment = 0) ->
-    @tokens.push new Token(
-      @tokenType,
-      value,
-      @tokenOffset,
-      @currentOffset + lengthAdjustment + 1,
-      @tokenLine,
-      @tokenColumn
+    @nextToken = new Token(
+      type,
+      '',
+      @currentOffset,
+      0,
+      @currentLine,
+      @currentColumn
     )
 
-    @tokenOffset = @currentOffset
+  _endToken: (value, lengthAdjustment = 0) ->
+    @nextToken.value = value
+    @nextToken.endOffset = @currentOffset + lengthAdjustment + 1
+    @tokens.push @nextToken
+    @nextToken = null
 
   # checks if string is all white space
   @ctype_space: (str) ->
