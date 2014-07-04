@@ -1,7 +1,8 @@
 Lexer = require '../../src/Parser/lexer'
 Token = require '../../src/Parser/token'
 
-#these must be declared before the tests are run
+ParseException = require '../../src/Exception/parseException'
+
 lexTestVectors = {
   'empty expression':
     expression: ''
@@ -147,4 +148,9 @@ describe 'Lexer', ->
       it description, ->
         # console.log description
         chai.assert.deepEqual lexer.lex(test.expression), test.result, description
+
+    it 'failure in quoted string', ->
+      assert.throw (-> lexer.lex('"foo')), ParseException, 'Expected closing quote.'
+    it 'failure in quoted string escape', ->
+      assert.throw (-> lexer.lex('"foo\\')), ParseException, 'Expected character after backslash.'
 

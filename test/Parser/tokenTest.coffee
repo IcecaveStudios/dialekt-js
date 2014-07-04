@@ -40,9 +40,10 @@ describe 'Token', ->
     assert.equal 4, token.columnNumber
     
   describe 'Type Description', ->
-    it 'Correct Types', ->
+    describe 'correct types', ->
       tokenDescriptionsTestVectors.forEach (tokenTestVector) ->
-        assert.equal tokenTestVector.description, Token.typeDescription(tokenTestVector.type)
+        it tokenTestVector.description, ->
+          assert.equal tokenTestVector.description, Token.typeDescription(tokenTestVector.type)
     it 'Incorrect Type', ->
       assert.throw (-> Token.typeDescription('unknown')), LogicException, 'Unknown type.'
       
