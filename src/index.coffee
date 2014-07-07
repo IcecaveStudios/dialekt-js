@@ -4,3 +4,4 @@ module.exports =
   Exception : require './Exception/index'
   Parser    : require './Parser/index'
   Renderer  : require './Renderer/index'
+  version   : require('../package.json').version
