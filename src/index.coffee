@@ -1,6 +1,6 @@
 module.exports =
-  AST       : require './AST/index.coffee' 
-  Evaluator : require './Evaluator/index.coffee'
-  Exception : require './Exception/index.coffee'
-  Parser    : require './Parser/index.coffee'
-  Renderer  : require './Renderer/index.coffee'
+  AST       : require './AST/index' 
+  Evaluator : require './Evaluator/index'
+  Exception : require './Exception/index'
+  Parser    : require './Parser/index'
+  Renderer  : require './Renderer/index'

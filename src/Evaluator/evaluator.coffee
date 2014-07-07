@@ -43,7 +43,6 @@ class Evaluator extends VisitorInterface
   visitLogicalAnd: (node) ->
     matchedTags = []
     isMatch = true
-    debugger
     for n in node.children
       result = n.accept @
       if not result.isMatch 

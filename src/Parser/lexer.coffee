@@ -50,7 +50,6 @@ class Lexer
 
       @currentOffset++
       previousChar = char
-    debugger
     if Lexer.STATE_SIMPLE_STRING is @state
       @_finalizeSimpleString()
     else if Lexer.STATE_QUOTED_STRING is @state
@@ -94,7 +93,6 @@ class Lexer
        @buffer += char
 
   _handleQuotedStringState: (char) ->
-    debugger
     if char is '\\'
       @state = Lexer.STATE_QUOTED_STRING_ESCAPE
     else if char is '"'

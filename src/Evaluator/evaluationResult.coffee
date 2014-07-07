@@ -8,7 +8,6 @@ class EvaluationResult
   constructor: (isMatch, expressionResults) ->
     @isMatch = isMatch
     @expressionResults = {}
-    debugger
     for result in expressionResults
       @expressionResults[JSON.stringify(result.expression)] = result
     
