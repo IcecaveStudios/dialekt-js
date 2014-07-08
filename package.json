@@ -4,10 +4,12 @@
   "description": "JS port of IcecaveStudios PHP Dialekt",
   "main": "lib/index.js",
   "scripts": {
-    "build":        "coffee --compile --output lib src",
-    "prepublish":   "coffee --compile --output lib src",
-    "postpublish":  "rm -rf lib",
-    "test":         "mocha"
+    "build": "./node_modules/.bin/coffee --compile --output lib src",
+    "prepublish": "./node_modules/.bin/coffee --compile --output lib src",
+    "postpublish": "rm -rf lib",
+    "test": "./node_modules/.bin/_mocha",
+    "coverage": "./node_modules/.bin/_mocha -R json-cov",
+    "postinstall": "./node_modules/.bin/coffee --compile --output lib src"
   },
   "keywords": [
     "expression",
@@ -26,6 +28,8 @@
     "grunt-gh-pages": "^0.9.1",
     "grunt-docco": "^0.3.3",
     "grunt-codo": "^0.1.0",
-    "sinon": "^1.10.2"
+    "sinon": "^1.10.2",
+    "coffee-coverage": "^0.4.2",
+    "dialekt-js": "git://github.com/IcecaveStudios/dialekt-js.git#develop"
   }
 }
