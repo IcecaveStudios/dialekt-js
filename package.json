@@ -29,7 +29,6 @@
     "grunt-docco": "^0.3.3",
     "grunt-codo": "^0.1.0",
     "sinon": "^1.10.2",
-    "coffee-coverage": "^0.4.2",
-    "dialekt-js": "git://github.com/IcecaveStudios/dialekt-js.git#develop"
+    "coffee-coverage": "^0.4.2"
   }
 }
