@@ -11,7 +11,7 @@
     "test": "npm run coveralls",
     "testspec": "./node_modules/.bin/_mocha",
     "coverage": "./node_modules/.bin/_mocha -R json-cov",
-    "coveralls": "./node_modules/.bin/mocha",
+    "coveralls": "./node_modules/.bin/mocha --reporter mocha-lcov-reporter | ./node_modules/.bin/coveralls src",
     "coverageHtml": "./node_modules/.bin/mocha --reporter html-cov > coverage.html && open coverage.html"
   },
   "keywords": [
@@ -32,6 +32,8 @@
     "grunt-docco": "^0.3.3",
     "grunt-codo": "^0.1.0",
     "sinon": "^1.10.2",
-    "coffee-coverage": "^0.4.2"
+    "coffee-coverage": "^0.4.2",
+    "mocha-lcov-reporter": "0.0.1",
+    "coveralls": "^2.11.1"
   }
 }
