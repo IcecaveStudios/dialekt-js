@@ -11,6 +11,22 @@
 
 This is a JavaScript port of the [original PHP package](https://github.com/IcecaveStudios/dialekt).
 
+
+
+### Developing
+* clone
+* npm install
+* modify .coffee
+* mocha (for coverage: mocha --reporter html-cov > coverage.html)
+* npm run build (generates js)
+
+### To use
+* clone
+* npm install
+* npm run build (generates js)
+* use files in lib/
+
+
 <!-- references -->
 [Build Status]: http://img.shields.io/travis/IcecaveStudios/dialekt-js/develop.svg
 [Test Coverage]: http://img.shields.io/coveralls/IcecaveStudios/dialekt-js/develop.svg
