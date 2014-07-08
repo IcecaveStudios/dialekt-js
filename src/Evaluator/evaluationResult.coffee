@@ -10,13 +10,6 @@ class EvaluationResult
     @expressionResults = {}
     for result in expressionResults
       @expressionResults[JSON.stringify(result.expression)] = result
-    
-  # Indicates whether or not the expression matched the tag set.
-  #
-  # @return boolean True if the expression matched the tag set otherwise, false.
-  #
-  isMatch: () ->
-    return @isMatch
   
   # Fetch the result for an individual expression node from the AST.
   #

@@ -25,15 +25,6 @@ class AbstractParser extends ParserInterface
     @wildcardString = wildcardString
 
   #
-  # Set whether or not the parser captures the expression source for each AST
-  # node.
-  #
-  # @param boolean captureSource True if expression source is captured; otherwise, false.
-  #
-  setCaptureSource: (captureSource) ->
-    @captureSource = captureSource
-
-  #
   # Parse an expression.
   #
   # @param string         expression The expression to parse.
