@@ -4,12 +4,15 @@
   "description": "JS port of IcecaveStudios PHP Dialekt",
   "main": "lib/index.js",
   "scripts": {
+    "postinstall": "./node_modules/.bin/coffee --compile --output lib src",
     "build": "./node_modules/.bin/coffee --compile --output lib src",
     "prepublish": "./node_modules/.bin/coffee --compile --output lib src",
     "postpublish": "rm -rf lib",
-    "test": "./node_modules/.bin/_mocha",
+    "test": "npm run coveralls",
+    "testspec": "./node_modules/.bin/_mocha",
     "coverage": "./node_modules/.bin/_mocha -R json-cov",
-    "postinstall": "./node_modules/.bin/coffee --compile --output lib src"
+    "coveralls": "./node_modules/.bin/mocha --reporter mocha-lcov-reporter | ./node_modules/.bin/coveralls src",
+    "coverageHtml": "./node_modules/.bin/mocha --reporter html-cov > coverage.html && open coverage.html"
   },
   "keywords": [
     "expression",
