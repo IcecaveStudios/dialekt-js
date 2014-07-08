@@ -1,4 +1,4 @@
-AbstractPolyadicExpression = require './AbstractPolyadicExpression'
+AbstractPolyadicExpression = require './abstractPolyadicExpression'
 #
 # An AST node that represents the logical OR operator.
 #

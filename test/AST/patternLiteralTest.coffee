@@ -1,4 +1,4 @@
-PatternLiteral = require '../../src/AST/PatternLiteral'
+PatternLiteral = require '../../src/AST/patternLiteral'
 VisitorInterface = require '../../src/AST/visitorInterface'
 
 describe "PatternLiteral", ->

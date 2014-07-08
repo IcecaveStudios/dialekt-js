@@ -2,6 +2,10 @@ global.chai = require 'chai'
 global.sinon = require 'sinon'
 global.assert = chai.assert
 
+console.log "Hereere"
+console.log __dirname
+
+VisitorInterface = require '../src/AST/visitorInterface'
 
 # mocha --reporter html-cov > coverage.html && open coverage.html
 require("coffee-coverage").register

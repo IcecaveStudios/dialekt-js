@@ -1,5 +1,5 @@
 Pattern = require '../../src/AST/pattern'
-PatternLiteral = require '../../src/AST/PatternLiteral'
+PatternLiteral = require '../../src/AST/patternLiteral'
 PatternWildcard = require '../../src/AST/patternWildcard'
 VisitorInterface = require '../../src/AST/visitorInterface'
 

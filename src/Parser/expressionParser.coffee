@@ -9,7 +9,7 @@ LogicalAnd      = require '../AST/logicalAnd'
 LogicalNot      = require '../AST/logicalNot'
 LogicalOr       = require '../AST/logicalOr'
 Pattern         = require '../AST/pattern'
-PatternLiteral  = require '../AST/PatternLiteral'
+PatternLiteral  = require '../AST/patternLiteral'
 PatternWildcard = require '../AST/patternWildcard'
 Tag             = require '../AST/tag'
 

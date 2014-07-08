@@ -11,7 +11,7 @@
     "test": "npm run coveralls",
     "testspec": "./node_modules/.bin/_mocha",
     "coverage": "./node_modules/.bin/_mocha -R json-cov",
-    "coveralls": "./node_modules/.bin/mocha --reporter mocha-lcov-reporter | ./node_modules/.bin/coveralls src",
+    "coveralls": "./node_modules/.bin/mocha",
     "coverageHtml": "./node_modules/.bin/mocha --reporter html-cov > coverage.html && open coverage.html"
   },
   "keywords": [
