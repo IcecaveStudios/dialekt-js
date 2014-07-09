@@ -4,4 +4,5 @@ docs/
 .grunt/
 coverage/
 coverage.html
+gruntfile.coffee
 

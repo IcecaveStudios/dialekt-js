@@ -4,7 +4,6 @@
   "description": "JS port of IcecaveStudios PHP Dialekt",
   "main": "lib/index.js",
   "scripts": {
-    "postinstall": "coffee --compile --output lib src",
     "build": "coffee --compile --output lib src",
     "prepublish": "coffee --compile --output lib src",
     "postpublish": "rm -rf lib",
