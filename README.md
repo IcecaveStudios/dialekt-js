@@ -26,6 +26,13 @@ This is a JavaScript port of the [original PHP package](https://github.com/Iceca
 * npm run build (generates js)
 * use files in lib/
 
+### Generate Docs
+* clone
+* npm install
+* grunt codo (generates docs/)
+* grunt gh-pages (commits new docs to gh-pages branch pushes them to upstream)
+
+
 
 <!-- references -->
 [Build Status]: http://img.shields.io/travis/IcecaveStudios/dialekt-js/develop.svg
