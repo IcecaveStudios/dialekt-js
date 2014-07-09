@@ -12,19 +12,24 @@
 This is a JavaScript port of the [original PHP package](https://github.com/IcecaveStudios/dialekt).
 
 
+### To use
+* npm install dialekt-js --save
+or 
+* git clone
+* npm install
+* npm run build (generates js)
+* npm link or use files in lib/
+* npm link dialekt-js (in from dependant project)
 
-### Developing
-* clone
+
+### Contribute
+* fork then clone
 * npm install
 * modify .coffee
 * mocha (for coverage: mocha --reporter html-cov > coverage.html)
 * npm run build (generates js)
 
-### To use
-* clone
-* npm install
-* npm run build (generates js)
-* use files in lib/
+
 
 ### Generate Docs
 * clone
