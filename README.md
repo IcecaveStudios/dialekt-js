@@ -6,7 +6,7 @@
 
 **Dialekt** is a very simple language for representing boolean expressions of the form often used by search engines.
 
-* Read the [API documentation](http://icecavestudios.github.io/dialekt-js/artifacts/documentation/api/)
+* Read the [API documentation](http://icecavestudios.github.io/dialekt-js/)
 * Try the [online demo](http://dialekt.icecave.com.au)
 
 This is a JavaScript port of the [original PHP package](https://github.com/IcecaveStudios/dialekt).
