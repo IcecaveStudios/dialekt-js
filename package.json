@@ -1,6 +1,6 @@
 {
   "name": "dialekt-js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "JS port of IcecaveStudios PHP Dialekt",
   "main": "lib/index.js",
   "scripts": {
