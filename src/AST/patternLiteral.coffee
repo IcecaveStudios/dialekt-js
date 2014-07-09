@@ -5,15 +5,15 @@ PatternChildInterface = require './patternChildInterface'
 class PatternLiteral extends PatternChildInterface
   
   #
-  # @param string $string The string to match.
+  # @param {string} string The string to match.
   #
   constructor: (string) ->
     @string = string
 
   # Pass this node to the appropriate method on the given visitor.
   #
-  # @param VisitorInterface visitor The visitor to dispatch to.
-  # @return mixed The visitation result.
+  # @param {VisitorInterface} visitor The visitor to dispatch to.
+  # @return {mixed} The visitation result.
   #
   accept: (visitor) ->
     visitor.visitPatternLiteral(@)

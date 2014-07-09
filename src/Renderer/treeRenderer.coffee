@@ -6,49 +6,45 @@ class TreeRenderer extends VisitorInterface
 
   # Construct a new tree renderer,
   #
-  # @param string|null endOfLine The end-of-line string to use.
+  # @param {String}
+  #
+  # @return {Token} endOfLine The end-of-line string to use.
   #
   constructor: (endOfLine) ->
     @endOfLine = endOfLine or '\n'
   
   # Render an expression to a string.
   #
-  # @param ExpressionInterface expression The expression to render.
+  # @param {ExpressionInterface} expression The expression to render.
   #
-  # @return string The rendered expression.
+  # @return {String} The rendered expression.
   #
   render: (expression) ->
     return expression.accept @
   
   # Visit a LogicalAnd node.
   #
-  # @internal
+  # @param {LogicalAnd} node The node to visit.
   #
-  # @param LogicalAnd node The node to visit.
-  #
-  # @return mixed
+  # @return {mixed}
   #
   visitLogicalAnd: (node) ->
     return 'AND' + @endOfLine + @_renderChildren(node)
 
   # Visit a LogicalOr node.
   #
-  # @internal
+  # @param {LogicalOr} node The node to visit.
   #
-  # @param LogicalOr node The node to visit.
-  #
-  # @return mixed
+  # @return {mixed}
   #
   visitLogicalOr: (node) ->
     return 'OR' + @endOfLine + @_renderChildren(node)
   
   # Visit a LogicalNot node.
   #
-  # @internal
+  # @param {LogicalNot} node The node to visit.
   #
-  # @param LogicalNot node The node to visit.
-  #
-  # @return mixed
+  # @return {mixed}
   #
   visitLogicalNot: (node) ->
     child = node.child.accept @
@@ -56,55 +52,45 @@ class TreeRenderer extends VisitorInterface
 
   # Visit a Tag node.
   #
-  # @internal
+  # @param {Tag} node The node to visit.
   #
-  # @param Tag node The node to visit.
-  #
-  # @return mixed
+  # @return {mixed}
   #
   visitTag: (node) ->
     return 'TAG ' + JSON.stringify node.name
 
   # Visit a Pattern node.
   #
-  # @internal
+  # @param {Pattern} node The node to visit.
   #
-  # @param Pattern node The node to visit.
-  #
-  # @return mixed
+  # @return {mixed}
   #
   visitPattern: (node) ->
     return 'PATTERN' + @endOfLine + @_renderChildren(node)
   
   # Visit a PatternLiteral node.
   #
-  # @internal
+  # @param {PatternLiteral} node The node to visit.
   #
-  # @param PatternLiteral node The node to visit.
-  #
-  # @return mixed
+  # @return {mixed}
   #
   visitPatternLiteral: (node) ->
     return 'LITERAL ' + JSON.stringify node.string
   
   # Visit a PatternWildcard node.
   #
-  # @internal
+  # @param {PatternWildcard} node The node to visit.
   #
-  # @param PatternWildcard node The node to visit.
-  #
-  # @return mixed
+  # @return {mixed}
   #
   visitPatternWildcard: (node) ->
     return 'WILDCARD'
   
   # Visit a EmptyExpression node.
   #
-  # @internal
+  # @param {EmptyExpression} node The node to visit.
   #
-  # @param EmptyExpression node The node to visit.
-  #
-  # @return mixed
+  # @return {mixed}
   #
   visitEmptyExpression: (node) ->
     return 'EMPTY'

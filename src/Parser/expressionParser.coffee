@@ -15,9 +15,7 @@ Tag             = require '../AST/tag'
 
 
 class ExpressionParser extends AbstractParser
-  #
-  # @param LexerInterface|null lexer The lexer used to tokenise input expressions.
-  #
+
   constructor: () ->
     super
     @setLogicalOrByDefault(false);
@@ -26,7 +24,7 @@ class ExpressionParser extends AbstractParser
   # Indicates whether or not the the default operator should be OR, rather
   # than AND.
   #
-  # @param boolean logicalOrByDefault True if the default operator should be OR, rather than AND.
+  # @param {Boolean} logicalOrByDefault True if the default operator should be OR, rather than AND.
   #
   setLogicalOrByDefault: (logicalOrByDefault) ->
     @logicalOrByDefault = logicalOrByDefault

@@ -9,29 +9,24 @@ ParseException      = require '../Exception/parseException'
 
 class AbstractParser extends ParserInterface
 
-  #
-  # @param LexerInterface|null lexer The lexer used to tokenise input expressions.
-  #
-  constructor: (lexer) -> 
+  constructor: () -> 
     @tokenStack = []
     @setWildcardString(Token.WILDCARD_CHARACTER)
 
-  #
   # Set the string to use as a wildcard placeholder.
   #
-  # @param string wildcardString The string to use as a wildcard placeholder.
+  # @param {string} wildcardString The string to use as a wildcard placeholder.
   #
   setWildcardString: (wildcardString) ->
     @wildcardString = wildcardString
 
-  #
   # Parse an expression.
   #
-  # @param string         expression The expression to parse.
-  # @param LexerInterface lexer      The lexer to use to tokenise the string, or null to use the default.
+  # @param {string}         expression The expression to parse.
+  # @param {LexerInterface} lexer      The lexer to use to tokenise the string, or @return {Token} to use the default.
   #
-  # @return ExpressionInterface The parsed expression.
-  # @throws ParseException      if the expression is invalid.
+  # @return {ExpressionInterface} The parsed expression.
+  # @throw {ParseException}      if the expression is invalid.
   #
   parse: (expression, lexer) ->
     lexer ?= new Lexer
@@ -40,10 +35,10 @@ class AbstractParser extends ParserInterface
 
   # Parse an expression that has already beed tokenized.
   #
-  # @param array<Token> The array of tokens that form the expression.
+  # @param [Array<Token>] The array of tokens that form the expression.
   #
-  # @return ExpressionInterface The parsed expression.
-  # @throws ParseException      if the expression is invalid.
+  # @return {ExpressionInterface} The parsed expression.
+  # @throw {ParseException}      if the expression is invalid.
   parseTokens: (tokens) ->
     # This acts as our array iterator
     @currentTokenIndex = 0
@@ -83,21 +78,15 @@ class AbstractParser extends ParserInterface
 
     return types.join(', ') +  ' or ' + lastType
 
-  #
   # Record the start of an expression.
-  #
-  # If source-capture is enabled, the current source code offset is recoreded.
-  #
   _startExpression: () ->
     @tokenStack.push @tokens[@currentTokenIndex]
 
-  #
   # Record the end of an expression.
   #
-  # If source-capture is enabled, the source code that produced this
-  # expression is set on the expression object.
+  # @param {ExpressionInterface} expression
   #
-  # @return ExpressionInterface
+  # @return {ExpressionInterface}
   #
   _endExpression: (expression) ->
     #Find the end offset of the source for this node ...

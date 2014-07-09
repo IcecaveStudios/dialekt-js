@@ -21,6 +21,10 @@ class Token
 
   # Returns string description of a token type
   # static function, again we want it associated to the constructor/class
+  #
+  # @param {Token.type} type 
+  # @return {String} description of token type
+  #
   @typeDescription: (type) ->
     switch type
       when Token.LOGICAL_AND

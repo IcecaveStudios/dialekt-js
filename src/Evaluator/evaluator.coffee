@@ -4,8 +4,8 @@ EvaluationResult = require './evaluationResult'
 
 class Evaluator extends VisitorInterface
     
-  # @param boolean caseSensitive   True if tag matching should be case-sensitive otherwise, false.
-  # @param boolean emptyIsWildcard True if an empty expression matches all tags or false to match none.
+  # @param {Boolean} caseSensitive   True if tag matching should be case-sensitive otherwise, false.
+  # @param {Boolean} emptyIsWildcard True if an empty expression matches all tags or false to match none.
   #
   constructor: (@caseSensitive, @emptyIsWildcard) ->
     @caseSensitive ?= false
@@ -13,10 +13,10 @@ class Evaluator extends VisitorInterface
 
   # Evaluate an expression against a set of tags.
   #
-  # @param ExpressionInterface expression The expression to evaluate.
-  # @param mixed<string>       tags       The set of tags to evaluate against.
+  # @param {ExpressionInterface} expression The expression to evaluate.
+  # @param [Mixed<string>]       tags       The set of tags to evaluate against.
   #
-  # @return EvaluationResult The result of the evaluation.
+  # @return {EvaluationResult} The result of the evaluation.
   #
   evaluate: (expression, tags) ->
     @tags = tags
@@ -34,11 +34,9 @@ class Evaluator extends VisitorInterface
 
   # Visit a LogicalAnd node.
   #
-  # @internal
+  # @param {LogicalAnd} node The node to visit.
   #
-  # @param LogicalAnd node The node to visit.
-  #
-  # @return mixed
+  # @return {mixed}
   #
   visitLogicalAnd: (node) ->
     matchedTags = []
@@ -72,11 +70,10 @@ class Evaluator extends VisitorInterface
 
   # Visit a LogicalOr node.
   #
-  # @internal
   #
-  # @param LogicalOr node The node to visit.
+  # @param {LogicalOr} node The node to visit.
   #
-  # @return mixed
+  # @return {mixed}
   #
   visitLogicalOr: (node) ->
     matchedTags = []
@@ -110,11 +107,10 @@ class Evaluator extends VisitorInterface
 
   # Visit a LogicalNot node.
   #
-  # @internal
   #
-  # @param LogicalNot node The node to visit.
+  # @param {LogicalNot} node The node to visit.
   #
-  # @return mixed
+  # @return {mixed}
   #
   visitLogicalNot: (node) ->
     childResult = node.child.accept @
@@ -129,11 +125,10 @@ class Evaluator extends VisitorInterface
 
   # Visit a Tag node.
   #
-  # @internal
   #
-  # @param Tag node The node to visit.
+  # @param {Tag} node The node to visit.
   #
-  # @return mixed
+  # @return {mixed}
   #
   visitTag: (node) ->
     if @caseSensitive 
@@ -150,11 +145,10 @@ class Evaluator extends VisitorInterface
 
   # Visit a pattern node.
   #
-  # @internal
   #
-  # @param Pattern node The node to visit.
+  # @param {Pattern} node The node to visit.
   #
-  # @return mixed
+  # @return {mixed}
   #
   visitPattern: (node) ->
 
@@ -175,9 +169,9 @@ class Evaluator extends VisitorInterface
 
   # Visit a PatternLiteral node.
   #
-  # @param PatternLiteral node The node to visit.
+  # @param {PatternLiteral} node The node to visit.
   #
-  # @return mixed
+  # @return {mixed}
   #
   visitPatternLiteral: (node) ->
     # preg_quote
@@ -186,9 +180,9 @@ class Evaluator extends VisitorInterface
 
   # Visit a PatternWildcard node.
   #
-  # @param PatternWildcard node The node to visit.
+  # @param {PatternWildcard} node The node to visit.
   #
-  # @return mixed
+  # @return {mixed}
   #
   visitPatternWildcard: (node) ->
     return '.*'
@@ -197,11 +191,10 @@ class Evaluator extends VisitorInterface
 
   # Visit a EmptyExpression node.
   #
-  # @internal
   #
-  # @param EmptyExpression node The node to visit.
+  # @param {EmptyExpression} node The node to visit.
   #
-  # @return mixed
+  # @return {mixed}
   #
   visitEmptyExpression: (node) ->
     result =  new ExpressionResult(

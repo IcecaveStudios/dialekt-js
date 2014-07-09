@@ -10,10 +10,10 @@ class Lexer
 
   # Tokenize an expression.
   #
-  # @param string 'expression' The expression to tokenize.
+  # @param {string} expression The expression to tokenize.
   #
-  # @return array<Token>   The tokens of the expression.
-  # @throws ParseException if the expression is invalid.
+  # @return [Array<Token>]   The tokens of the expression.
+  # @throw {ParseException} if the expression is invalid.
   #
   lex: (expression) ->
 

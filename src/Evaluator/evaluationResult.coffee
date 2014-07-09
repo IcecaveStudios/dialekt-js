@@ -2,8 +2,8 @@
 # The overall result of the evaluation of an expression.
 #
 class EvaluationResult    
-  # @param boolean                 isMatch           True if the expression matched the tag set otherwise, false.
-  # @param array<ExpressionResult> expressionResults The individual sub-expression results.
+  # @param {Boolean}                  isMatch           True if the expression matched the tag set otherwise, false.
+  # @param [Array<ExpressionResult>]  expressionResults The individual sub-expression results.
   #
   constructor: (isMatch, expressionResults) ->
     @isMatch = isMatch
@@ -13,10 +13,10 @@ class EvaluationResult
   
   # Fetch the result for an individual expression node from the AST.
   #
-  # @param ExpressionInterface expression The expression for which the result is fetched.
+  # @param {ExpressionInterface} expression The expression for which the result is fetched.
   #
-  # @return ExpressionResult         The result for the given expression.
-  # @throws UnexpectedValueException if there is no result for the given expression.
+  # @return {ExpressionResult}         The result for the given expression.
+  # @throw {UnexpectedValueException} if there is no result for the given expression.
   #
   resultOf: (expression) ->
     result = @expressionResults[JSON.stringify(expression)]

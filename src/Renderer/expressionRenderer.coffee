@@ -7,27 +7,25 @@ RenderException   = require '../Exception/renderException'
 #
 class ExpressionRenderer extends VisitorInterface
   #
-  # @param string wildcardString The string to use as a wildcard placeholder.
+  # @param {string} wildcardString The string to use as a wildcard placeholder.
   #
   constructor: (wildcardString) ->
     @wildcardString = wildcardString or Token.WILDCARD_CHARACTER
   
   # Render an expression to a string.
   #
-  # @param ExpressionInterface expression The expression to render.
+  # @param {ExpressionInterface} expression The expression to render.
   #
-  # @return string The rendered expression.
+  # @return {String} The rendered expression.
   #
   render: (expression) ->
     return expression.accept @
   
   # Visit a LogicalAnd node.
   #
-  # @internal
+  # @param {LogicalAnd} node The node to visit.
   #
-  # @param LogicalAnd node The node to visit.
-  #
-  # @return mixed
+  # @return {mixed}
   #
   visitLogicalAnd: (node) ->
     expressions = []
@@ -38,11 +36,9 @@ class ExpressionRenderer extends VisitorInterface
   
   # Visit a LogicalOr node.
   #
-  # @internal
+  # @param {LogicalOr} node The node to visit.
   #
-  # @param LogicalOr node The node to visit.
-  #
-  # @return mixed
+  # @return {mixed}
   #
   visitLogicalOr: (node) ->
     expressions = []
@@ -53,33 +49,27 @@ class ExpressionRenderer extends VisitorInterface
   
   # Visit a LogicalNot node.
   #
-  # @internal
+  # @param {LogicalNot} node The node to visit.
   #
-  # @param LogicalNot node The node to visit.
-  #
-  # @return mixed
+  # @return {mixed}
   #
   visitLogicalNot: (node) ->
     return 'NOT ' + node.child.accept @
   
   # Visit a Tag node.
   #
-  # @internal
+  # @param {Tag} node The node to visit.
   #
-  # @param Tag node The node to visit.
-  #
-  # @return mixed
+  # @return {mixed}
   #
   visitTag: (node) ->
     return ExpressionRenderer.escapeString node.name
 
   # Visit a Pattern node.
   #
-  # @internal
+  # @param {Pattern} node The node to visit.
   #
-  # @param Pattern node The node to visit.
-  #
-  # @return mixed
+  # @return {mixed}
   #
   visitPattern: (node) ->
     string = ''
@@ -91,11 +81,9 @@ class ExpressionRenderer extends VisitorInterface
   
   # Visit a PatternLiteral node.
   #
-  # @internal
+  # @param {PatternLiteral} node The node to visit.
   #
-  # @param PatternLiteral node The node to visit.
-  #
-  # @return mixed
+  # @return {mixed}
   #
   visitPatternLiteral: (node) ->  
     if node.string.indexOf(@wildcardString) is -1 
@@ -107,22 +95,18 @@ class ExpressionRenderer extends VisitorInterface
   
   # Visit a PatternWildcard node.
   #
-  # @internal
+  # @param {PatternWildcard} node The node to visit.
   #
-  # @param PatternWildcard node The node to visit.
-  #
-  # @return mixed
+  # @return {mixed}
   #
   visitPatternWildcard: (node) ->
     return @wildcardString
   
   # Visit a EmptyExpression node.
   #
-  # @internal
+  # @param {EmptyExpression} node The node to visit.
   #
-  # @param EmptyExpression node The node to visit.
-  #
-  # @return mixed
+  # @return {mixed}
   #
   visitEmptyExpression: (node) ->
     return 'NOT ' + @wildcardString

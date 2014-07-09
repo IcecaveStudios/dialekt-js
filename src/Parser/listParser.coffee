@@ -51,10 +51,10 @@ class ListParser extends AbstractParser
   # The expression must be a space-separated list of tags. The result is
   # an array of strings.
   #
-  # @param string expression The tag list to parse.
+  # @param {string} expression The tag list to parse.
   #
-  # @return array<string>  The tags in the list.
-  # @throws ParseException if the tag list is invalid.
+  # @return [Array<String>]  The tags in the list.
+  # @throw {ParseException} if the tag list is invalid.
   #
   parseAsArray: (expression) ->
     result = @parse(expression)
