@@ -1,6 +1,6 @@
 {
   "name": "dialekt-js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "JS port of IcecaveStudios PHP Dialekt",
   "main": "lib/index.js",
   "scripts": {
@@ -10,6 +10,10 @@
     "test": "mocha",
     "coveralls": "mocha --reporter mocha-lcov-reporter | coveralls src",
     "coverageHtml": "mocha --reporter html-cov > coverage.html && open coverage.html"
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/IcecaveStudios/dialekt-js.git"
   },
   "keywords": [
     "expression",
